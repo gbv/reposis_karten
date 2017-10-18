@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mycoreclass xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MCRClassification.xsd" ID="x001148x">
+  <label xml:lang="x-uri" text="http://kartenspeicher.gbv.de/classifications/x001148x" />
+  <label xml:lang="de" text="Grafik, Fotografie" />
+  <categories>
+    <category ID="x001151x">
+      <label xml:lang="de" text="Druckgrafik" />
+      <url xlink:href="http://obg.vocnet.org/x001151x" xlink:type="locator" />
+      <category ID="x001185x">
+        <label xml:lang="de" text="Tiefdruck" />
+        <url xlink:href="http://obg.vocnet.org/x001185x" xlink:type="locator" />
+        <category ID="x001192x">
+          <label xml:lang="de" text="Kupferstich" />
+          <url xlink:href="http://obg.vocnet.org/x001192x" xlink:type="locator" />
+        </category>
+      </category>
+      <category ID="tr000029">
+        <label xml:lang="de" text="Farbdruck" />
+        <url xlink:href="http://obg.vocnet.org/tr000029" xlink:type="locator" />
+      </category>
+      <category ID="x001162x">
+        <label xml:lang="de" text="Flachdruck" />
+        <url xlink:href="http://obg.vocnet.org/x001162x" xlink:type="locator" />
+        <category ID="x001166x">
+          <label xml:lang="de" text="Lithografie" />
+          <url xlink:href="http://obg.vocnet.org/x001166x" xlink:type="locator" />
+        </category>
+      </category>
+    </category>
+    <category ID="x001235x">
+      <label xml:lang="de" text="Zeichnung" />
+      <url xlink:href="http://obg.vocnet.org/x001235x" xlink:type="locator" />
+    </category>
+  </categories>
+</mycoreclass>
