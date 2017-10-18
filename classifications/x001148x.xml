@@ -6,12 +6,32 @@
     <category ID="x001151x">
       <label xml:lang="de" text="Druckgrafik" />
       <url xlink:href="http://obg.vocnet.org/x001151x" xlink:type="locator" />
+      <category ID="x001176x">
+        <label xml:lang="de" text="Hochdruck" />
+        <url xlink:href="http://obg.vocnet.org/x001176x" xlink:type="locator" />
+        <category ID="x001177x">
+          <label xml:lang="de" text="Holzschnitt" />
+          <url xlink:href="http://obg.vocnet.org/x001177x" xlink:type="locator" />
+        </category>
+      </category>
       <category ID="x001185x">
         <label xml:lang="de" text="Tiefdruck" />
         <url xlink:href="http://obg.vocnet.org/x001185x" xlink:type="locator" />
         <category ID="x001192x">
           <label xml:lang="de" text="Kupferstich" />
           <url xlink:href="http://obg.vocnet.org/x001192x" xlink:type="locator" />
+        </category>
+        <category ID="x001196x">
+          <label xml:lang="de" text="Radierung" />
+          <url xlink:href="http://obg.vocnet.org/x001196x" xlink:type="locator" />
+        </category>
+        <category ID="x001202x">
+          <label xml:lang="de" text="Stahlstich" />
+          <url xlink:href="http://obg.vocnet.org/x001202x" xlink:type="locator" />
+        </category>
+        <category ID="ts005001">
+          <label xml:lang="de" text="Zinkographie" />
+          <url xlink:href="http://obg.vocnet.org/ts005001" xlink:type="locator" />
         </category>
       </category>
       <category ID="tr000029">
