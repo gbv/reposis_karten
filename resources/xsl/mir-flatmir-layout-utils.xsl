@@ -18,11 +18,9 @@
         </nav>
       </div>
       <div id="project_logo_box">
-        <img src="http://journals.gbv.de/journals/jp_templates/template_gwlb/IMAGES/GBV.png" class="GBV" />
-        <a href="{concat($WebApplicationBaseURL,substring($loaded_navigation_xml/@hrefStartingPage,2),$HttpSession)}"
-           class="project_name">
-          Kartenrepositorium
-        </a>
+        <img src="{$WebApplicationBaseURL}/images/GBV.png" class="GBV" />
+        <span id="gbv-name"><a href="{concat($WebApplicationBaseURL,substring($loaded_navigation_xml/@hrefStartingPage,2),$HttpSession)}"
+           class="project_name">Kartenrepositorium</a></span>
       </div>
       <div id="gbv"></div>
     </div>
