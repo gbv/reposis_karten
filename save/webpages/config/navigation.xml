@@ -58,8 +58,8 @@
       <label xml:lang="en">Institutions</label>
     </item>
     <item href="/content/browse/print.xml" type="intern">
-      <label xml:lang="de">Grafik / Druck</label>
-      <label xml:lang="en">Graphic / Print</label>
+      <label xml:lang="de">Illustration</label>
+      <label xml:lang="en">Illustration</label>
     </item>
     <item href="/servlets/MCRActionMappingServlet/personindex/browse" type="extern">
       <label xml:lang="de">Personen</label>
