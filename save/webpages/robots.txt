@@ -1,4 +1,4 @@
-Sitemap: http://kartenspeicher.gbv.de/mir/sitemap_google.xml
+Sitemap: http://esx-155.gbv.de/mir/sitemap_google.xml
 User-agent: *
 Allow: /servlets/MCRFileNodeServlet/
 Disallow: /*?

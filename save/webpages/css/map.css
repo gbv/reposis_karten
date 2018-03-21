@@ -24,8 +24,8 @@ html {
   min-height: 100%;
 }
 html, body {
-  background: white linear-gradient(to bottom, rgba(85, 127, 187, 1) 0%, rgba(85, 127, 187, 1) 162px, rgba(238, 238, 238, 1) 162px, rgba(238, 238, 238, 1) 100%) no-repeat;
-  background-image: linear-gradient(to bottom, rgba(85,127,187,1) 0%, rgba(85,127,187,1) 162px, rgba(238,238,238,1) 162px, rgb(238, 238, 238) 100%);
+  background: white linear-gradient(to bottom, rgba(238, 238, 238, 1) 0%, rgba(238, 238, 238, 1) 162px, rgba(238, 238, 238, 1) 162px, rgba(238, 238, 238, 1) 100%) no-repeat;
+  background-image: linear-gradient(to bottom, rgba(238,238,238,1) 0%, rgba(238,238,238,1) 162px, rgba(238,238,238,1) 162px, rgb(238, 238, 238) 100%);
   /* line-height: 1.42857143; */
 }
 
@@ -41,9 +41,13 @@ html body {
 
 html body header #header_box {
   margin: 0px auto 0px auto;
-  background-color: #557fbb;
-  background-image: linear-gradient(180deg, #7ea0c8 0%, #557fbb 98%, #557fbb 100%);
+  background-color: #EEEEEE;
+
+ //background-image: linear-gradient(to bottom, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
+  background-image: url(../images/logo.png);
+  //background-image: linear-gradient(180deg, #7ea0c8 0%, #557fbb 98%, #557fbb 100%);
   padding: 0px;
+  height: 162px;
 }
 
 html body header #header_box #project_logo_box {
@@ -59,15 +63,14 @@ html body header #header_box #project_logo_box a {
   font-size: 25px;
   font-weight: 300;
   margin-left: 40px;
-  display: table-caption;
 }
 
 .mir-prop-nav .navbar-nav > li > a .caret {
-  border-top-color: white;
+  border-top-color: black;
 }
 
 #gbv {
-  background-image: url(../images/logo.png);
+
   border-top: 1px solid white;
   background-position: left top;
   background-repeat: no-repeat;
@@ -86,10 +89,32 @@ html body header #header_box #project_logo_box a {
    Navigation
 ---------------------------------------------------------------------------- */
 .mir-prop-nav .navbar-nav > li > a {
-  color: white;
+  color: black;
 }
 
+.mir-main-nav {
+  background-color: #EEEEEE;
+}
 
+.mir-main-nav nav .navbar-nav>li>a {
+  color: black;
+}
+
+.mir-main-nav nav .navbar-nav>li>a:hover {
+  background-color: #808080;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+  background-color: #808080;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+  background-color: #808080;
+}
+
+.mir-main-nav nav .navbar-nav .dropdown-menu {
+  background-color: #808080;
+}
 
 /* ----------------------------------------------------------------------------
    Footer
@@ -115,4 +140,14 @@ html body #powered_by {
   font-weight: 300;
   line-height: 84px;
   margin-bottom: 77px;
+}
+
+.mir-main-nav .searchfield_box .navbar-form .btn {
+  background-color: black;
+  border-color: black;
+}
+
+button.btn.btn-primary.btn-md {
+  background-color: #808080;
+  border-color: #808080;
 }
