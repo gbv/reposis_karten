@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:i18n="xalan://org.mycore.services.i18n.MCRTranslation"
     xmlns:mcrver="xalan://org.mycore.common.MCRCoreVersion"
     xmlns:mcrxsl="xalan://org.mycore.common.xml.MCRXMLFunctions"
-    exclude-result-prefixes="i18n mcrver mcrxsl">
+    exclude-result-prefixes="mcrver mcrxsl">
 
   <xsl:import href="resource:xsl/layout/mir-common-layout.xsl" />
   <xsl:template name="mir.navigation">
@@ -20,10 +19,10 @@
       </div>
       <div id="project_logo_box">
         <img src="{$WebApplicationBaseURL}/images/GBV.png" class="GBV" />
-        <!--<span id="gbv-name"><a href="{concat($WebApplicationBaseURL,substring($loaded_navigation_xml/@hrefStartingPage,2),$HttpSession)}"
-                               class="project_name">Zeitschriftenserver</a></span>-->
+        <span id="gbv-name"><a href="{concat($WebApplicationBaseURL,substring($loaded_navigation_xml/@hrefStartingPage,2),$HttpSession)}"
+           class="project_name">Kartenrepositorium</a></span>
       </div>
-      <!--<div id="gbv"></div>-->
+      <div id="gbv"></div>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,7 +45,7 @@
           <form action="{$WebApplicationBaseURL}servlets/solr/find" class="navbar-form navbar-left pull-right" role="search">
             <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
             <div class="form-group">
-              <input name="condQuery" placeholder="{i18n:translate('mir.cosmol.navsearch.placeholder')}" class="form-control search-query" id="searchInput" type="text" />
+              <input name="condQuery" placeholder="Suche" class="form-control search-query" id="searchInput" type="text" />
               <xsl:if test="not(mcrxsl:isCurrentUserGuestUser())">
                 <input name="owner" type="hidden" value="createdby:{$CurrentUser}" />
               </xsl:if>
