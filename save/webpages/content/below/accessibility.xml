@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MyCoReWebPage>
+<MyCoReWebPage>
+  <section xml:lang="de" title="Barrierefreiheitserklärung ">
+    <div class="row">
+      <div class="col" lang="de">
+
+        <h2> Erklärung zur Barrierefreiheit <small class="text-muted">(Stand der Erklärung:
+          22.10.2020)</small>
+        </h2>
+        <p>
+          Als öffentliche Stelle im Sinne der Richtlinie (EU) 2016/2102 ist die Deutsche Akademie der Naturforscher Leopoldina e.V. - Nationale Akademie der Wissenschaften - bemüht, ihre Websites und mobilen Anwendungen im Einklang mit den Bestimmungen des Behindertengleichstellungsgesetzes des Bundes (BGG) sowie der Barrierefreien-Informationstechnik-Verordnung (BITV 2.0) zur Umsetzung der Richtlinie (EU) 2016/2102 barrierefrei zugänglich zu machen.
+        </p>
+
+        <p>
+          Diese Erklärung zur Barrierefreiheit gilt für den Dokumentenserver der Deutschen Akademie der Naturforscher Leopoldina e.V., der unter der Domain <a href="https://levana.leopoldina.org">levana.leopoldina.org</a> zu erreichen ist.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-12">
+        
+        <h3> Stand der Vereinbarung mit den Anforderungen </h3>
+        
+        <p>Aufgrund der Überprüfung ist die Webseite mit den zuvor genannten Anforderungen
+          nicht an allen Stellen vereinbar. Die Webseite <a href="levana.leopoldina.org">levana.leopoldina.org</a>
+          ist aus den folgenden Gründen noch nicht abschließend barrierefrei:</p>
+        
+        <dl>
+          <dt>Im Webauftritt eingebundene Dokumente (.pdf, .doc, etc.)</dt>
+          <dd class="ml-4">
+            Dokumente, die vor September 2020 eingestellt wurden, sind gegebenenfalls
+            nicht barrierefrei. Aufgrund der sehr großen Anzahl der Dokumente, können
+            diese nicht in ein barrierefreies Format umgewandelt werden, da zum Teil die
+            Ausgangsformate fehlen und eine nachträgliche Bearbeitung der Dokumente
+            unverhältnismäßig arbeitsaufwendig ist.<br />
+            Dokumente, die von Dritten bereitgestellt werden, liegen eventuell nicht
+            barrierefrei vor (siehe § 9 Abs. 2 Satz 2 NBGG).<br/>
+            Bei neu erscheinenden Dokumenten die in den Verantwortungsbereich der
+            Universitätsbibliothek fallen, streben wir an, künftig zeitnah eine
+            barrierefreie Version zur Verfügung zu stellen. Für alle weiteren Dokumente
+            halten wir unsere Datenlieferanten an, die Anforderungen zur Barrierefreiheit zu
+            beachten.
+          </dd>
+          
+          <dt>Im Webauftritt enthaltene Informationen in Gebärdensprache und
+            in leichter Sprache</dt>
+          <dd class="ml-4">
+            Wir streben an, eine möglichst einfache Sprache zu benutzen. Auf Grund der
+            komplexen Inhalte, die zumindest teilweise in unseren Webauftritten
+            veröffentlicht werden, ist eine einfache Sprachgestaltung (beispielsweise
+            der Verzicht auf Fachbegriffe) nicht immer möglich.
+          </dd>
+          
+          <dt>Im Webauftritt eingebundene Videos</dt>
+          <dd class="ml-4">Die Bereitstellung der Videos mit einer Audiodeskription konnte bislang
+            nicht realisiert werden.</dd>
+          
+          <dt>Alternativtexte (1.1.1 a-c )</dt>
+          <dd class="ml-4">An einigen Stellen fehlen die Alternativtexte. Bei einem nächsten Update werden diese ergänzt werden.</dd>
+          
+          <dt>HTML-Strukurelemente (1.3.1 a-f )</dt>
+          <dd class="ml-4">Einige HTML-Strukurelemente sind nur teilweise barrierefrei, da die entsprechenden Bootstrap-Klassen fehlen.
+            Eine Überarbeitung ist in Arbeit.</dd>
+          
+          <dt>Eingabefelder zu Nutzerdaten vermitteln den Zweck (1.3.5a)</dt>
+          <dd class="ml-4">Formulare nutzen keine Autovervollständigung. Bei Formularen fehlen die „autocomplete“-Attribute, was das Ausfüllen der Formulare erschwert.
+            Bei einem Update soll die Funktionalität künftig ergänzt werden.</dd>
+          
+          <dt>Kontraste von Texten ausreichend (1.4.3)</dt>
+          <dd class="ml-4">Da das grundsätzliche Layout der Webseite vor dem Erscheinen der Richtlinie (EU) 2016/2102 erstellt wurde, ist das Kontrastverhältnis von 4,5:1 nicht grundsätzlich sichergestellt.
+            An einer Lösung wird gearbeitet.</dd>
+          
+          <dt>Aktuelle Position des Fokus deutlich (2.4.7a)</dt>
+          <dd class="ml-4">Der Fokus ist bei der Bedienung mit der Tastatur nicht immer erkennbar.
+            Die Anpassung des Fokus-Managements erfolgt bei der nächsten grundlegenden Überarbeitung der Website.</dd>
+          
+          <dt>Fehlererkennung (3.3.1a)</dt>
+          <dd class="ml-4">Angaben in Formularen werden vor dem Abschicken nicht automatisch überprüft. 
+            Bei der nächsten grundlegenden Überarbeitung der Website soll die Funktionalität künftig ergänzt werden.</dd>
+          
+          <dt>Statusmeldungen programmatisch verfügbar (4.1.3a)</dt>
+          <dd class="ml-4">Es erfolgt weder visuell noch im Screenreader ein Hinweis das, das Dokument auf die Merkliste gesetzt wurde.
+            Die entsprechende "Role" wird im Rahmen eines Updates ergänzt.</dd>
+        </dl>
+        <p>Die identifizierten technischen Defizite und Mängel befinden sich aktuell in einem kontinuierlichen Verbesserungsprozess,
+          der sukzessive abgearbeitet wird.</p>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-12">
+        <h3> Erstellung dieser Erklärung zur Barrierefreiheit </h3>
+        
+        <p>
+          Diese Erklärung wurde am 22.10.2020 erstellt.
+          Die Einschätzung basiert auf einer Selbstbewertung.</p>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-12">
+        <h3> Feedback und Kontaktangaben </h3>
+        
+        <p>Über folgenden Kontakt können Sie Mängel in Bezug auf die Einhaltung der
+          Barrierefreiheitsanforderungen mitteilen und Informationen zu den Inhalten
+          anfordern, die von der Richtlinie ausgenommen sind:</p>
+        
+        <p class="border-left pl-5">
+          E-Mail: dokuserver@leopoldina.org
+        </p>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-12">
+        <h3> Schlichtungsverfahren </h3>
+        
+        <p>Sollten Sie auf Mitteilungen oder Anfragen zur Barrierefreiheit innerhalb von
+          sechs Wochen keine zufriedenstellende Antwort erhalten haben, können Sie die
+          Schlichtungsstelle BGG einschalten.</p>
+
+        <p class="border-left pl-5">
+          Schlichtungsstelle nach dem Behindertengleichstellungsgesetz<br />
+          bei dem Beauftragten der Bundesregierung für die Belange von Menschen mit Behinderungen<br />
+          Mauerstraße 53<br />
+          10117 Berlin<br /><br />
+
+          Telefon: 030 18 527-2805<br />
+          Fax: 030 18 527-2901<br /><br />
+
+          E-Mail:<br />
+          info@schlichtungsstelle-bgg.de<br /><br />
+
+          Internet:<br /><br />
+          www.schlichtungsstelle-bgg.de
+          
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+<meta>
+  <log date="2020-10-22" time="18:26" labelPath=" » Admin" lastEditor="Kathleen Neumann" />
+</meta>
+</MyCoReWebPage>

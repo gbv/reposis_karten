@@ -1,0 +1,77 @@
+/*  layout settings
+ *  - styles for basic layout elements
+ */
+
+// Extra large devices (large desktops)
+// set the defaults for all responsive levels here
+// no (xl) media query necessary (desktop first)
+
+body,
+#page {
+  background-color: #f7f7f7;
+}
+
+body.login {
+  background-image: url('../../../../images/red-map.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment:fixed;
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  header {
+    display: none;
+  }
+  #page {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
+    background-color: transparent;
+  }
+  #main_content {
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    img.logo-backend {
+      position: absolute;
+      top: 12px;
+      right: -110px;
+      width: 100px;
+    }
+    img.logo-map {
+      width: 320px;
+      margin-bottom: 60px;
+      align-self: center;
+    }
+    img.logo-vzg {
+      width: 280px;
+      margin-top: 80px;
+      align-self: center;
+    }
+  }
+}
+
+
+// Large devices (desktops) and below: <= 1200px
+@include media-breakpoint-down(lg) {
+  // add/overwrite styles for responsive level lg and lower
+}
+
+// Medium devices (tablets) and below: <= 992px
+@include media-breakpoint-down(md) {
+  // add/overwrite styles for responsive level md and lower
+}
+
+// Small devices (landscape phones) and below: <= 768px
+@include media-breakpoint-down(sm) {
+  // add/overwrite styles for responsive level sm and lower
+}
+
+// Extra small devices (portrait phones): <= 576px
+@include media-breakpoint-down(xs) {
+  // add/overwrite styles for responsive level xs
+}
