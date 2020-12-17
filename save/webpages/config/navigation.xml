@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <navigation dir="/content" href="navigation" hrefStartingPage="/content/index.xml" template="template_mir">
   <menu id="main" dir="/content/main">
@@ -23,15 +24,15 @@
   <menu id="below" dir="/content/below">
     <label xml:lang="de">Footer-Menü</label>
     <label xml:lang="en">Footer menu</label>
-    <item href="/content/below/imprint.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+    <item href="https://www.gbv.de/impressum" type="extern" replaceMenu="false" constrainPopUp="false">
       <label xml:lang="de">Impressum</label>
       <label xml:lang="en">Legal Notice</label>
     </item>
-    <item href="/content/below/rights.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+    <item href="https://www.gbv.de/datenschutz" type="extern" replaceMenu="false" constrainPopUp="false">
         <label xml:lang="de">Datenschutz</label>
         <label xml:lang="en">Privacy Notice</label>
     </item>
-    <item href="/content/below/accessibility.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+    <item href="https://www.gbv.de/erklaerung-zur-barrierefreiheit" type="extern" replaceMenu="false" constrainPopUp="false">
         <label xml:lang="de">Barrierefreiheit</label>
         <label xml:lang="en">Accessibility</label>
     </item>
