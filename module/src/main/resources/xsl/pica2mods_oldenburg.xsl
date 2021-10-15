@@ -26,6 +26,8 @@
 
     <xsl:param name="MCR.PICA2MODS.CONVERTER_VERSION" select="'Pica2Mods 2.1'"/>
     <xsl:param name="MCR.PICA2MODS.DATABASE" select="'k10plus'"/>
+    <xsl:param name="institute" />
+    <xsl:param name="collection" />
 
     <xsl:template match="p:record">
         <mods:mods>
@@ -43,6 +45,7 @@
             <xsl:call-template name="modsRelatedItem"/>
             <xsl:call-template name="odbModsSubjectCartographics"/>
             <xsl:call-template name="odbModsInstitution" />
+            <xsl:call-template name="odbModsCollectionClass" />
             <xsl:call-template name="odbx001148Class" />
         </mods:mods>
     </xsl:template>
@@ -67,11 +70,15 @@
     </xsl:template>
 
     <xsl:template name="odbModsInstitution">
-        <mods:name type="corporate" authorityURI="http://www.mycore.org/classifications/mir_institutes" valueURI="http://www.mycore.org/classifications/mir_institutes#lb_oldenburg" xlink:type="simple">
+        <mods:name type="corporate" authorityURI="http://www.mycore.org/classifications/mir_institutes" valueURI="http://www.mycore.org/classifications/mir_institutes#{$institute}" xlink:type="simple">
             <mods:role>
                 <mods:roleTerm authority="marcrelator" type="code">his</mods:roleTerm>
             </mods:role>
         </mods:name>
+    </xsl:template>
+
+    <xsl:template name="odbModsCollectionClass">
+        <mods:classification authorityURI="http://kartenspeicher.gbv.de/mir/api/v1/classifications/collection" displayLabel="collection" valueURI="http://kartenspeicher.gbv.de/mir/api/v1/classifications/collection#{$collection}" />
     </xsl:template>
 
     <xsl:template name="odbModsSubjectCartographics">

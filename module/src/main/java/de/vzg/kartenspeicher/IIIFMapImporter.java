@@ -40,6 +40,7 @@ import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.content.MCRContent;
 import org.mycore.common.content.MCRJDOMContent;
 import org.mycore.common.content.transformer.MCRContentTransformer;
+import org.mycore.common.content.transformer.MCRParameterizedTransformer;
 import org.mycore.common.xml.MCRLayoutService;
 import org.mycore.common.xsl.MCRParameterCollector;
 import org.mycore.datamodel.metadata.MCRDerivate;
@@ -71,8 +72,8 @@ public class IIIFMapImporter {
         //importMaps("https://digital.lb-oldenburg.de/i3f/v21/1227819/manifest");
     }
 
-    public static void importPair(String ppn, String manifestURL) throws Exception {
-        MCRObjectID objectId = importPPN(ppn);
+    public static void importPair(String ppn, String manifestURL, String projectID, String instituteID, String collection) throws Exception {
+        MCRObjectID objectId = importPPN(ppn, projectID, instituteID, collection);
         MCRDerivate derivate = createDerivate(objectId, new ArrayList<>());
         MCRPath derivateRoot = MCRPath.getPath(derivate.getId().toString(), "/");
         String mainFile = downloadMaps(manifestURL, derivateRoot);
@@ -82,19 +83,22 @@ public class IIIFMapImporter {
         }
     }
 
-    public static MCRObjectID importPPN(String ppn) throws Exception {
+    public static MCRObjectID importPPN(String ppn, String projectID, String instituteID, String collection) throws Exception {
         String url = "https://unapi.k10plus.de/?&format=picaxml&id=k10plus:ppn:" + ppn;
         Document jdomDoc = new SAXBuilder().build(new URL(url));
 
-        MCRContentTransformer tx = MCRLayoutService.getContentTransformer("pica2mods_iiif",
-            new MCRParameterCollector());
-        MCRContent resultMods = tx.transform(new MCRJDOMContent(jdomDoc));
+        MCRParameterCollector parameter = new MCRParameterCollector();
+        parameter.setParameter("institute", instituteID);
+        parameter.setParameter("collection", collection);
+        MCRParameterizedTransformer tx = (MCRParameterizedTransformer) MCRLayoutService.getContentTransformer("pica2mods_iiif",
+                parameter);
+        MCRContent resultMods = tx.transform(new MCRJDOMContent(jdomDoc), parameter);
 
         MCRMODSWrapper mw = new MCRMODSWrapper();
         Element mods = resultMods.asXML().detachRootElement();
         converCoordinates(mods);
         mw.setMODS(mods);
-        MCRObjectID odb_mods = MCRObjectID.getNextFreeId("odb_mods");
+        MCRObjectID odb_mods = MCRObjectID.getNextFreeId(projectID + "_mods");
         MCRObject mcrObject = mw.getMCRObject();
         mcrObject.setId(odb_mods);
         MCRMetadataManager.create(mcrObject);

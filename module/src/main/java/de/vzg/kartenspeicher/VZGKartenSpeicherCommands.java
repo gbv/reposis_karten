@@ -33,10 +33,10 @@ import java.util.Optional;
 @MCRCommandGroup(name = "Kartenspeicher")
 public class VZGKartenSpeicherCommands {
 
-    @MCRCommand(syntax = "import ppn {0} with manifest {1}",
+    @MCRCommand(syntax = "import ppn {0} with manifest {1} with project {2} with institute {3} with collection {4}",
             help = "Imports a object represented by ppn from k10p and downloads all images from a iiif manifest to a derivate")
-    public static void importPicaIIIF(String ppn, String manifest) throws Exception {
-        IIIFMapImporter.importPair(ppn, manifest);
+    public static void importPicaIIIF(String ppn, String manifest, String projectID, String instituteID, String collection) throws Exception {
+        IIIFMapImporter.importPair(ppn, manifest, projectID, instituteID, collection);
     }
 
     private static final String MAP_DOWNLOAD = "MAP_DOWNLOAD";
