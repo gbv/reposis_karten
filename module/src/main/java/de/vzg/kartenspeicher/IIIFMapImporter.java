@@ -84,7 +84,7 @@ public class IIIFMapImporter {
     }
 
     public static MCRObjectID importPPN(String ppn, String projectID, String instituteID, String collection) throws Exception {
-        String url = "https://unapi.k10plus.de/?&format=picaxml&id=k10plus:ppn:" + ppn;
+        String url = MCRConfiguration2.getStringOrThrow("MCR.UnAPIURL") + ppn;
         Document jdomDoc = new SAXBuilder().build(new URL(url));
 
         MCRParameterCollector parameter = new MCRParameterCollector();
