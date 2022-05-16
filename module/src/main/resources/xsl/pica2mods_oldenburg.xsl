@@ -87,7 +87,7 @@
         <xsl:variable name="coords"
                       select="p:datafield[@tag='035G']/p:subfield[@code='a' or @code='b' or @code='c' or @code='d']"/>
 
-        <xsl:if test="string-length($scale) &gt; 0 or string-length($coords) &gt; 0">
+        <xsl:if test="string-length($scale) &gt; 0 or count($coords) &gt; 0">
             <mods:subject authority="k10plus_field_4028">
                 <mods:cartographics>
                     <xsl:if test="string-length($scale) &gt; 0">
