@@ -33,6 +33,32 @@ import java.util.Optional;
 @MCRCommandGroup(name = "Kartenspeicher")
 public class VZGKartenSpeicherCommands {
 
+    @MCRCommand(syntax = "update object {0} from catalog",
+            help = "tries to reload object {0} from the catalog",
+            order = 30)
+    public static void reloadObject(String objid) throws Exception {
+        IIIFMapImporter.updateObject(objid, false);
+    }
+
+    @MCRCommand(syntax = "update object {0} from catalog and reload",
+            help = "tries to reload object {0} from the catalog",
+            order = 15)
+    public static void reloadObjectReload(String objid) throws Exception {
+        IIIFMapImporter.updateObject(objid, true);
+    }
+    @MCRCommand(syntax = "update ppn {0} from {1}",
+            help = "tries to reload the xml metadata of the ppn {0} from the catalog {1}",
+            order = 25)
+    public static void reloadPicaIIIF(String ppn, String catalog) throws Exception {
+        IIIFMapImporter.importPair(ppn, catalog, null,null,null,null, false);
+    }
+
+    @MCRCommand(syntax = "update ppn {0} from {1} and reload",
+            help = "tries to reload the xml metadata of the ppn {0} from the catalog {1} and redownloads the maps",
+            order = 10)
+    public static void reloadPicaIIIFRedownload(String ppn, String catalog) throws Exception {
+        IIIFMapImporter.importPair(ppn, catalog, null,null,null,null, true);
+    }
     @MCRCommand(syntax = "import ppn {0} from {1} with manifest {2} with project {3} with institute {4} with collection {5}",
             help = "Imports a object represented by ppn from k10p and downloads all images from a iiif manifest to a derivate",
             order = 20)
@@ -42,7 +68,7 @@ public class VZGKartenSpeicherCommands {
 
     @MCRCommand(syntax = "import ppn {0} from {1} with manifest {2} with project {3} with institute {4} with collection {5} and reload",
             help = "Imports a object represented by ppn from k10p and downloads all images from a iiif manifest to a derivate",
-            order = 10)
+            order = 5)
     public static void importPicaIIIFRedownload(String ppn, String catalog, String manifest, String projectID, String instituteID, String collection) throws Exception {
         IIIFMapImporter.importPair(ppn, catalog, manifest, projectID, instituteID, collection, true);
     }

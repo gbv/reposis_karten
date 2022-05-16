@@ -34,6 +34,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.solr.common.SolrDocument;
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.Namespace;
 import org.jdom2.input.SAXBuilder;
 import org.mycore.access.MCRAccessException;
 import org.mycore.common.MCRConstants;
@@ -69,6 +70,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -86,11 +88,27 @@ public class IIIFMapImporter {
 
     private static final String CATALOG_URL_REG_EXP_STR = "https?:\\/\\/uri.gbv.de\\/document\\/([a-zA-Z0-9]+):ppn:([a-zA-Z0-9]+)";
 
+    public static final Namespace PICA_NAMESPACE = Namespace.getNamespace("pica", "info:srw/schema/5/picaXML-v1.0");
+
     private static final Pattern CATALOG_URL_REG_EXP_PATTERN = Pattern.compile(CATALOG_URL_REG_EXP_STR);
+    public static final String INSTITUTE_CLASSIFICATION = "http://www.mycore.org/classifications/mir_institutes";
+    public static final String COLLECTION_CLASSIFICATION = "http://kartenspeicher.gbv.de/mir/api/v1/classifications/collection";
+    private static final String APPEND_MAX_QUALITY_JPG = "/full/full/0/default.jpg";
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         //importMaps("https://digital.lb-oldenburg.de/i3f/v21/1227819/manifest");
         //downloadMaps("https://digitale-sammlungen.gwlb.de/content/100650309/manifest.json", Paths.get("/home/sebastian/karten/"))
+    }
+
+    public static void updateObject(String obj, boolean redownload) throws Exception {
+        MCRObjectID objectID = MCRObjectID.getInstance(obj);
+        MCRObject object = MCRMetadataManager.retrieveMCRObject(objectID);
+        Element mods = new MCRMODSWrapper(object).getMODS();
+        Tuple<String, String> stringStringTuple = extractPPN(mods);
+        String ppn = stringStringTuple.getE2();
+        String catalog = stringStringTuple.getE1();
+        existingPPNMap.put(ppn, objectID);
+        importPair(ppn, catalog, null, null,null, null, redownload);
     }
 
     public static void importPair(String ppn,
@@ -100,14 +118,22 @@ public class IIIFMapImporter {
                                   String instituteID,
                                   String collection,
                                   boolean redownload) throws Exception {
+        Tuple<MCRObjectID, String> objectIdManifest = importPPN(ppn, catalog, projectID, instituteID, collection, true);
 
-        MCRObjectID objectId = importPPN(ppn, catalog, projectID, instituteID, collection, true);
+        MCRObjectID objectId = objectIdManifest.getE1();
 
         MCRObject mcrObject = MCRMetadataManager.retrieveMCRObject(objectId);
         Optional<MCRMetaEnrichedLinkID> mayDerivate = mcrObject.getStructure().getDerivates().stream().findFirst();
         MCRDerivate derivate;
 
-        if(!testManifest(manifestURL)){
+        if (manifestURL == null || manifestURL.equals("null")) {
+            if (objectIdManifest.getE2() == null) {
+                throw new MCRException("There is not manifest for (catalog, ppn, object) (" + catalog + "," + ppn + "," + objectId.toString() + ")");
+            }
+            manifestURL = objectIdManifest.getE2();
+        }
+
+        if (!testManifest(manifestURL)) {
             LOGGER.error("The manifest " + manifestURL + " seems to be invalid!");
             return;
         }
@@ -143,15 +169,41 @@ public class IIIFMapImporter {
      * @return the id of the create or updated object
      * @throws Exception
      */
-    public static MCRObjectID importPPN(String ppn, String catalog, String projectID, String instituteID, String collection, boolean overwrite) throws Exception {
+    public static Tuple<MCRObjectID, String> importPPN(String ppn, String catalog, String projectID, String instituteID, String collection, boolean overwrite) throws Exception {
         MCRObjectID existingObject = checkPPNExists(ppn, catalog);
 
-        if(existingObject!=null && !overwrite){
-            return existingObject;
+        if (existingObject == null && (
+                collection == null ||
+                        collection.equals("null") ||
+                        instituteID == null ||
+                        instituteID.equals("null") ||
+                        projectID == null ||
+                        projectID.equals("null")
+        )) {
+            throw new MCRException("There is no existing object for ppn : " + ppn + " in catalog " + catalog + " and institute or collection is missing!");
+        }
+
+        if (existingObject != null && !overwrite) {
+            return new Tuple<>(existingObject, null);
         }
 
         String url = constructCatalogURL(ppn, catalog);
         Document picaDocument = new SAXBuilder().build(new URL(url));
+
+        Optional<String> manifestURL = picaDocument.getRootElement().getChildren("datafield", PICA_NAMESPACE)
+                .stream()
+                .filter(element -> element.getAttributeValue("tag").equals("017H"))
+                .map(element -> element.getChildren("subfield", PICA_NAMESPACE)
+                        .stream()
+                        .filter(field -> field.getAttributeValue("code").equals("u"))
+                        .map(Element::getTextTrim)
+                        .findFirst())
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .findAny();
+
+        instituteID = readInstituteFromOldObject(instituteID, existingObject);
+        collection = readCollectionFromOldObject(collection, existingObject);
 
         MCRParameterCollector parameter = new MCRParameterCollector();
         parameter.setParameter("institute", instituteID);
@@ -176,7 +228,7 @@ public class IIIFMapImporter {
 
             Tuple<String, String> catalogPpnTuple = extractPPN(relatedItem);
 
-            MCRObjectID id = importPPN(catalogPpnTuple.getE2(), catalogPpnTuple.getE1(), projectID, instituteID, collection, false);
+            MCRObjectID id = importPPN(catalogPpnTuple.getE2(), catalogPpnTuple.getE1(), projectID, instituteID, collection, false).getE1();
             relatedItem.setAttribute("href", id.toString(), MCRConstants.XLINK_NAMESPACE);
             relatedItem.setAttribute("type", "simple", MCRConstants.XLINK_NAMESPACE);
             List<Element> children = relatedItem.getChildren()
@@ -197,7 +249,27 @@ public class IIIFMapImporter {
             existingPPNMap.put(ppn, objectID);
         }
 
-        return mcrObject.getId();
+        return new Tuple<>(mcrObject.getId(), manifestURL.orElse(null));
+    }
+
+    private static String readInstituteFromOldObject(String instituteID, MCRObjectID existingObject) {
+        MCRObject oldObj;
+        if ((instituteID == null || instituteID.equals("null")) && existingObject != null) {
+            oldObj = MCRMetadataManager.retrieveMCRObject(existingObject);
+            Element modsNameInstitute = new MCRMODSWrapper(oldObj).getElement("mods:name[@type=\"corporate\" and @authorityURI=\"" + INSTITUTE_CLASSIFICATION + "\"]");
+            instituteID = modsNameInstitute.getAttributeValue("valueURI").substring(INSTITUTE_CLASSIFICATION.length() + 1);
+        }
+        return instituteID;
+    }
+
+    private static String readCollectionFromOldObject(String collection, MCRObjectID existingObject) {
+        MCRObject oldObj;
+        if ((collection == null || collection.equals("null")) && existingObject != null) {
+            oldObj = MCRMetadataManager.retrieveMCRObject(existingObject);
+            Element modsNameInstitute = new MCRMODSWrapper(oldObj).getElement("mods:classification[@authorityURI=\"" + COLLECTION_CLASSIFICATION + "\"]");
+            collection = modsNameInstitute.getAttributeValue("valueURI").substring(COLLECTION_CLASSIFICATION.length() + 1);
+        }
+        return collection;
     }
 
     private static String constructCatalogURL(String ppn, String catalog) {
@@ -208,7 +280,7 @@ public class IIIFMapImporter {
         return relatedItemOrMods
                 .getChildren("identifier", MCRConstants.MODS_NAMESPACE)
                 .stream()
-                .filter(el->"uri".equals(el.getAttributeValue("type")))
+                .filter(el -> "uri".equals(el.getAttributeValue("type")))
                 .map(Element::getTextTrim)
                 .map(CATALOG_URL_REG_EXP_PATTERN::matcher)
                 .filter(Matcher::matches)
@@ -303,44 +375,61 @@ public class IIIFMapImporter {
                 Integer width = imageService.getWidth();
                 Integer height = imageService.getHeight();
 
-                TileInfo tileInfo = imageService.getTiles().stream().findFirst().get();
-
-                Integer tileSizeWidth = tileInfo.getWidth();
-                Integer tileSizeHeight = tileInfo.getHeight();
-
-                double xTiles = Math.ceil((double) width / tileSizeWidth);
-                double yTiles = Math.ceil((double) height / tileSizeHeight);
-
-                BufferedImage result = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-                Graphics graphics = result.getGraphics();
+                List<TileInfo> tiles = imageService.getTiles();
                 String filename = imageUrl.substring(imageUrl.lastIndexOf('/') + 1) + ".jpg";
 
-                for (int yTile = 0; yTile < yTiles; yTile++) {
-                    int yStart = yTile * tileSizeWidth;
-                    int yEnd = Math.min(yStart + tileSizeHeight, height); // should only be triggered at corner tile
-                    int curTileHeight = yEnd - yStart;
-                    for (int xTile = 0; xTile < xTiles; xTile++) {
-                        int xStart = xTile * tileSizeWidth;
-                        int xEnd = Math.min(xStart + tileSizeWidth, width); // should only be triggered at corner tile
-                        int curTileWidth = xEnd - xStart;
+                if (tiles == null || tiles.size() == 0) {
+                    String downloadURL = imageUrl + APPEND_MAX_QUALITY_JPG;
+                    LOGGER.info("Download {} to {}", downloadURL, filename);
+                    try (InputStream is = new URL(downloadURL).openStream()) {
+                        if (mainFile == null) {
+                            mainFile = filename;
+                        }
+                        Files.copy(is, targetFolder.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
+                    }
+                } else {
+                    TileInfo tileInfo = tiles.stream().findFirst().get();
 
-                        String tileURL = imageUrl + "/" + xStart + "," + yStart + "," + curTileWidth + "," + curTileHeight + "/full/0/default.jpg";
-                        LOGGER.info("Downloading and draw tile {}/{} x:{}/{} y:{}/{} of {}", (yTile * xTiles) + xTile, xTiles * yTiles, xTile, xTiles, yTile, yTiles, filename);
-                        try (InputStream is = new URL(tileURL).openStream()) {
-                            BufferedImage tileImage = ImageIO.read(is);
-                            graphics.drawImage(tileImage, xStart, yStart, null);
+                    Integer tileSizeWidth = tileInfo.getWidth();
+                    Integer tileSizeHeight = tileInfo.getHeight();
+
+                    double xTiles = Math.ceil((double) width / tileSizeWidth);
+                    double yTiles = Math.ceil((double) height / tileSizeHeight);
+
+                    BufferedImage result = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+                    Graphics graphics = result.getGraphics();
+
+                    for (int yTile = 0; yTile < yTiles; yTile++) {
+                        int yStart = yTile * tileSizeWidth;
+                        int yEnd = Math.min(yStart + tileSizeHeight, height); // should only be triggered at corner tile
+                        int curTileHeight = yEnd - yStart;
+                        for (int xTile = 0; xTile < xTiles; xTile++) {
+                            int xStart = xTile * tileSizeWidth;
+                            int xEnd = Math.min(xStart + tileSizeWidth, width); // should only be triggered at corner tile
+                            int curTileWidth = xEnd - xStart;
+
+                            String tileURL = imageUrl + "/" + xStart + "," + yStart + "," + curTileWidth + "," + curTileHeight + "/full/0/default.jpg";
+                            LOGGER.info("Downloading and draw tile {}/{} x:{}/{} y:{}/{} of {}", (yTile * xTiles) + xTile, xTiles * yTiles, xTile, xTiles, yTile, yTiles, filename);
+                            try (InputStream is = new URL(tileURL).openStream()) {
+                                BufferedImage tileImage = ImageIO.read(is);
+                                graphics.drawImage(tileImage, xStart, yStart, null);
+                            }
+                        }
+                    }
+                    graphics.dispose();
+
+
+                    LOGGER.info("Writing resulting Image to {}", filename);
+                    try (OutputStream os = Files.newOutputStream(targetFolder.resolve(filename))) {
+                        if (!ImageIO.write(result, "jpg", os)) {
+                            throw new IOException("Could not find a writer for the Image: " + filename + " in manifest " + manifestURL);
+                        }
+                        if (mainFile == null) {
+                            mainFile = filename;
                         }
                     }
                 }
-                graphics.dispose();
 
-
-                LOGGER.info("Writing reulting Image to {}", filename);
-                try (OutputStream os = Files.newOutputStream(targetFolder.resolve(filename))) {
-                    if (!ImageIO.write(result, "jpg", os)) {
-                        throw new IOException("Could not find a writer for the Image: " + filename + " in manifest " + manifestURL);
-                    }
-                }
             }
         }
         return mainFile;
