@@ -260,6 +260,7 @@ public class IIIFMapImporter {
                 }
             }
         }
+        return true;
     }
 
     public static String downloadMaps(String manifestURL, Path targetFolder) throws IOException {
