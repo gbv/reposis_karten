@@ -24,7 +24,7 @@
     <xsl:import href="_common/pica2mods-pica-PREPROCESSING.xsl"/>
     <xsl:import href="_common/pica2mods-functions.xsl"/>
 
-    <xsl:param name="MCR.PICA2MODS.CONVERTER_VERSION" select="'Pica2Mods 2.1'"/>
+    <xsl:param name="MCR.PICA2MODS.CONVERTER_VERSION" select="'Pica2Mods 2.3'"/>
     <xsl:param name="MCR.PICA2MODS.DATABASE" select="'k10plus'"/>
     <xsl:param name="institute" />
     <xsl:param name="collection" />
@@ -43,6 +43,7 @@
             <xsl:call-template name="modsRecordInfo"/>
             <xsl:call-template name="modsNote"/>
             <xsl:call-template name="modsRelatedItem"/>
+            <xsl:call-template name="modsSubject" />
             <xsl:call-template name="odbModsSubjectCartographics"/>
             <xsl:call-template name="odbModsInstitution" />
             <xsl:call-template name="odbModsCollectionClass" />
@@ -86,8 +87,8 @@
         <xsl:variable name="coords"
                       select="p:datafield[@tag='035G']/p:subfield[@code='a' or @code='b' or @code='c' or @code='d']"/>
 
-        <xsl:if test="string-length($scale) &gt; 0">
-            <mods:subject>
+        <xsl:if test="string-length($scale) &gt; 0 or string-length($coords) &gt; 0">
+            <mods:subject authority="k10plus_field_4028">
                 <mods:cartographics>
                     <xsl:if test="string-length($scale) &gt; 0">
                         <mods:scale>
