@@ -33,10 +33,18 @@ import java.util.Optional;
 @MCRCommandGroup(name = "Kartenspeicher")
 public class VZGKartenSpeicherCommands {
 
-    @MCRCommand(syntax = "import ppn {0} with manifest {1} with project {2} with institute {3} with collection {4}",
-            help = "Imports a object represented by ppn from k10p and downloads all images from a iiif manifest to a derivate")
-    public static void importPicaIIIF(String ppn, String manifest, String projectID, String instituteID, String collection) throws Exception {
-        IIIFMapImporter.importPair(ppn, manifest, projectID, instituteID, collection);
+    @MCRCommand(syntax = "import ppn {0} from {1} with manifest {2} with project {3} with institute {4} with collection {5}",
+            help = "Imports a object represented by ppn from k10p and downloads all images from a iiif manifest to a derivate",
+            order = 20)
+    public static void importPicaIIIF(String ppn, String catalog, String manifest, String projectID, String instituteID, String collection) throws Exception {
+        IIIFMapImporter.importPair(ppn, catalog, manifest, projectID, instituteID, collection, false);
+    }
+
+    @MCRCommand(syntax = "import ppn {0} from {1} with manifest {2} with project {3} with institute {4} with collection {5} and reload",
+            help = "Imports a object represented by ppn from k10p and downloads all images from a iiif manifest to a derivate",
+            order = 10)
+    public static void importPicaIIIFRedownload(String ppn, String catalog, String manifest, String projectID, String instituteID, String collection) throws Exception {
+        IIIFMapImporter.importPair(ppn, catalog, manifest, projectID, instituteID, collection, true);
     }
 
     private static final String MAP_DOWNLOAD = "MAP_DOWNLOAD";

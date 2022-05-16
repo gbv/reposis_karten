@@ -85,11 +85,6 @@
   <dependencies>
     <dependency>
       <groupId>org.mycore</groupId>
-      <artifactId>mycore-base</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mycore</groupId>
       <artifactId>mycore-mods</artifactId>
       <scope>provided</scope>
     </dependency>
@@ -102,7 +97,23 @@
       <groupId>org.mycore.pica2mods</groupId>
       <artifactId>pica2mods-xslt</artifactId>
       <version>2.3-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mycore</groupId>
+      <artifactId>mycore-base</artifactId>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mycore</groupId>
+      <artifactId>mycore-base</artifactId>
+      <scope>test</scope>
+      <classifier>tests</classifier>
+      <version>${mycore.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
