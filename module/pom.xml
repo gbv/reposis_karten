@@ -5,7 +5,7 @@
   <parent>
     <groupId>de.gbv.reposis</groupId>
     <artifactId>reposis_parent</artifactId>
-    <version>2020.06-SNAPSHOT</version>
+    <version>2021.06-SNAPSHOT</version>
   </parent>
   <groupId>de.vzg</groupId>
   <artifactId>karten-speicher</artifactId>
