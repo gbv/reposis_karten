@@ -83,7 +83,7 @@
     </xsl:template>
 
     <xsl:template name="odbModsSubjectCartographics">
-        <xsl:variable name="scale" select="p:datafield[@tag='035E']/p:subfield[@code='g']"/>
+        <xsl:variable name="scale" select="p:datafield[@tag='035E'][1]/p:subfield[@code='g']"/>
         <xsl:variable name="coords"
                       select="p:datafield[@tag='035G']/p:subfield[@code='a' or @code='b' or @code='c' or @code='d']"/>
 
