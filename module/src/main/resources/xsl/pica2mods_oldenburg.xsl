@@ -84,6 +84,7 @@
 
     <xsl:template name="odbModsSubjectCartographics">
         <xsl:variable name="scale" select="p:datafield[@tag='035E'][1]/p:subfield[@code='g']"/>
+        <xsl:variable name="scaleHumanReadable" select="p:datafield[@tag='035E'][1]/p:subfield[@code='a']"/>
         <xsl:variable name="coords"
                       select="p:datafield[@tag='035G']/p:subfield[@code='a' or @code='b' or @code='c' or @code='d']"/>
 
@@ -104,6 +105,11 @@
                     </xsl:if>
                 </mods:cartographics>
             </mods:subject>
+        </xsl:if>
+        <xsl:if test="string-length($scaleHumanReadable) &gt; 0">
+          <mods:note type="cartographics_scale">
+            <xsl:value-of select="$scaleHumanReadable"/>
+          </mods:note>
         </xsl:if>
     </xsl:template>
 
