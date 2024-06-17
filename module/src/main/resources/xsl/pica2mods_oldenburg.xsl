@@ -71,7 +71,29 @@
     </xsl:template>
 
     <xsl:template name="odbModsInstitution">
-        <mods:name type="corporate" authorityURI="http://www.mycore.org/classifications/mir_institutes" valueURI="http://www.mycore.org/classifications/mir_institutes#{$institute}" xlink:type="simple">
+        <xsl:variable name="mappedInstitution">
+          <xsl:choose>
+              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Kunst und Kulturgeschichte Oldenburg'">
+                <xsl:value-of select="'lmo'" />
+              </xsl:when>
+              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Natur und Mensch Oldenburg'">
+                <xsl:value-of select="'lmnmo'" />
+              </xsl:when>
+              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Museumsdorf Cloppenburg'">
+                <xsl:value-of select="'mdc'" />
+              </xsl:when>
+              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Stadtmuseum Oldenburg'">
+                <xsl:value-of select="'smo'" />
+              </xsl:when>
+              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Schlossmuseum Jever'">
+                <xsl:value-of select="'smj'" />
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="$institute" />
+              </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <mods:name type="corporate" authorityURI="http://www.mycore.org/classifications/mir_institutes" valueURI="http://www.mycore.org/classifications/mir_institutes#{$mappedInstitution}" xlink:type="simple">
             <mods:role>
                 <mods:roleTerm authority="marcrelator" type="code">his</mods:roleTerm>
             </mods:role>

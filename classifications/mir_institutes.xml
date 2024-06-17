@@ -1,9 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mycoreclass xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MCRClassification.xsd" ID="mir_institutes">
-  <label xml:lang="de" text="Institutionen" description="Liste der Einrichtungen" />
+  <label xml:lang="de" text="Institutionen" description="Liste der Einrichtungen, die Karten bereitstellen" />
   <label xml:lang="x-uri" text="http://www.mycore.org/classifications/mir_institutes" />
-  <label xml:lang="en" text="Sample Institutions" description="A list of institutions" />
+  <label xml:lang="en" text="Institutions" description="List of organisations providing maps" />
   <categories>
+    <category ID="gwlb">
+      <label xml:lang="de" text="Gottfried Wilhelm Leibniz Bibliothek - Niedersächsische Landesbibliothek" />
+    </category>
+    <category ID="hab">
+      <label xml:lang="de" text="Herzog August Bibliothek Wolfenbüttel" />
+    </category>
+    <category ID="lb_oldenburg">
+      <label xml:lang="de" text="Landesbibliothek Oldenburg" />
+    </category>
+    <category ID="museen_oldenburg">
+      <label xml:lang="de" text="Museen Oldenburg" />
+      <category ID="lmo">
+        <label xml:lang="de" text="Landesmuseum für Kunst und Kulturgeschichte Oldenburg" />
+      </category>
+      <category ID="lmnmo">
+        <label xml:lang="de" text="Landesmuseum Natur und Mensch Oldenburg" />
+      </category>
+      <category ID="mdc">
+        <label xml:lang="de" text="Museumsdorf Cloppenburg" />
+      </category>
+      <category ID="smo">
+        <label xml:lang="de" text="Stadtmuseum Oldenburg" />
+      </category>
+      <category ID="smj">
+        <label xml:lang="de" text="Schlossmuseum Jever" />
+      </category>
+    </category>
+    <category ID="ifl">
+      <label xml:lang="de" text="Leibniz-Institut für Länderkunde" />
+    </category>
+    <category ID="SUUB_Bremen">
+      <label xml:lang="de" text="Staats- und Universitätsbibliothek Bremen" />
+      <label xml:lang="en" text="Staats- und Universitätsbibliothek Bremen" />
+    </category>
     <category ID="SUB_Göttingen">
       <label xml:lang="de" text="SUB Göttingen" />
     </category>
