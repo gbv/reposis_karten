@@ -71,9 +71,17 @@
     </xsl:template>
 
     <xsl:template name="odbModsInstitution">
-        <xsl:variable name="mappedInstitution">
+        <mods:name type="corporate" authorityURI="http://www.mycore.org/classifications/mir_institutes" valueURI="http://www.mycore.org/classifications/mir_institutes#{$institute}" xlink:type="simple">
+            <mods:role>
+                <mods:roleTerm authority="marcrelator" type="code">his</mods:roleTerm>
+            </mods:role>
+        </mods:name>
+    </xsl:template>
+
+    <xsl:template name="odbModsCollectionClass">
+        <xsl:variable name="mappedcollection">
           <xsl:choose>
-              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Kunst und Kulturgeschichte Oldenburg'">
+              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Kunst &amp; Kultur Oldenburg'">
                 <xsl:value-of select="'lmo'" />
               </xsl:when>
               <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Natur und Mensch Oldenburg'">
@@ -89,18 +97,10 @@
                 <xsl:value-of select="'smj'" />
               </xsl:when>
               <xsl:otherwise>
-                <xsl:value-of select="$institute" />
+                <xsl:value-of select="$collection" />
               </xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
-        <mods:name type="corporate" authorityURI="http://www.mycore.org/classifications/mir_institutes" valueURI="http://www.mycore.org/classifications/mir_institutes#{$mappedInstitution}" xlink:type="simple">
-            <mods:role>
-                <mods:roleTerm authority="marcrelator" type="code">his</mods:roleTerm>
-            </mods:role>
-        </mods:name>
-    </xsl:template>
-
-    <xsl:template name="odbModsCollectionClass">
         <mods:classification authorityURI="http://kartenspeicher.gbv.de/mir/api/v1/classifications/collection" displayLabel="collection" valueURI="http://kartenspeicher.gbv.de/mir/api/v1/classifications/collection#{$collection}" />
     </xsl:template>
 

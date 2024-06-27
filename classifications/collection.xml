@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mycoreclass xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MCRClassification.xsd" ID="collection">
+  <label xml:lang="x-uri" text="http://kartenspeicher.gbv.de/mir/api/v1/classifications/collection" />
+  <label xml:lang="de" text="Sammlung" />
+  <label xml:lang="en" text="Collection" />
+  <categories>
+    <category ID="lmo">
+      <label xml:lang="de" text="Landesmuseum Kunst &amp; Kultur Oldenburg" />
+    </category>
+    <category ID="lmnmo">
+      <label xml:lang="de" text="Landesmuseum Natur und Mensch Oldenburg" />
+    </category>
+    <category ID="mdc">
+      <label xml:lang="de" text="Museumsdorf Cloppenburg" />
+    </category>
+    <category ID="smo">
+      <label xml:lang="de" text="Stadtmuseum Oldenburg" />
+    </category>
+    <category ID="smj">
+      <label xml:lang="de" text="Schlossmuseum Jever" />
+    </category>
+    <category ID="lbo_altkarten">
+      <label xml:lang="de" text="Altkarten der LB Oldenburg" />
+    </category>
+    <category ID="gwlb_altkarten">
+      <label xml:lang="de" text="GWLB Altkarten" />
+    </category>
+    <category ID="hab_sammlung">
+      <label xml:lang="de" text="Kartensammlung der HAB" />
+    </category>
+    <category ID="sammlung_albers">
+      <label xml:lang="de" text="Sammlung Albers" />
+    </category>
+    <category ID="none">
+      <label xml:lang="de" text="Keiner Sammlung zugeordnet" />
+    </category>
+  </categories>
+</mycoreclass>

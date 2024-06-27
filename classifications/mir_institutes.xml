@@ -14,22 +14,7 @@
       <label xml:lang="de" text="Landesbibliothek Oldenburg" />
     </category>
     <category ID="museen_oldenburg">
-      <label xml:lang="de" text="Museen Oldenburg" />
-      <category ID="lmo">
-        <label xml:lang="de" text="Landesmuseum für Kunst und Kulturgeschichte Oldenburg" />
-      </category>
-      <category ID="lmnmo">
-        <label xml:lang="de" text="Landesmuseum Natur und Mensch Oldenburg" />
-      </category>
-      <category ID="mdc">
-        <label xml:lang="de" text="Museumsdorf Cloppenburg" />
-      </category>
-      <category ID="smo">
-        <label xml:lang="de" text="Stadtmuseum Oldenburg" />
-      </category>
-      <category ID="smj">
-        <label xml:lang="de" text="Schlossmuseum Jever" />
-      </category>
+      <label xml:lang="de" text="Oldenburger Museen" />
     </category>
     <category ID="ifl">
       <label xml:lang="de" text="Leibniz-Institut für Länderkunde" />
