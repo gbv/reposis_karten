@@ -101,7 +101,7 @@
               </xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
-        <mods:classification authorityURI="http://kartenspeicher.gbv.de/mir/api/v1/classifications/collection" displayLabel="collection" valueURI="http://kartenspeicher.gbv.de/mir/api/v1/classifications/collection#{$collection}" />
+        <mods:classification authorityURI="http://kartenspeicher.gbv.de/mir/api/v1/classifications/collection" displayLabel="collection" valueURI="http://kartenspeicher.gbv.de/mir/api/v1/classifications/collection#{$mappedcollection}" />
     </xsl:template>
 
     <xsl:template name="odbModsSubjectCartographics">
