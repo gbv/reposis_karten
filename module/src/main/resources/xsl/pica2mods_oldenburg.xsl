@@ -81,8 +81,8 @@
     <xsl:template name="odbModsCollectionClass">
         <xsl:variable name="mappedcollection">
           <xsl:choose>
-              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Kunst und Kulturgeschichte Oldenburg' or
-                              contains(p:datafield[@tag='036L']/p:subfield[@code='a'], 'Landesmuseum Kunst und Kulturgeschichte Oldenburg')">
+              <xsl:when test="contains(p:datafield[@tag='009A']/p:subfield[@code='c'], 'Landesmuseum Kunst und Kulturgeschichte') or
+                              contains(p:datafield[@tag='036L']/p:subfield[@code='a'], 'Landesmuseum Kunst und Kulturgeschichte')">
                 <xsl:value-of select="'lmo'" />
               </xsl:when>
               <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Natur und Mensch Oldenburg' or
