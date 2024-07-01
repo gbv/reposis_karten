@@ -96,6 +96,9 @@
               <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Schlossmuseum Jever'">
                 <xsl:value-of select="'smj'" />
               </xsl:when>
+              <xsl:when test="contains(p:datafield[@tag='036L']/p:subfield[@code='a'], 'Landesmuseum Natur und Mensch Oldenburg')">
+                <xsl:value-of select="'lmnmo'" />
+              </xsl:when>
               <xsl:otherwise>
                 <xsl:value-of select="$collection" />
               </xsl:otherwise>
