@@ -81,23 +81,25 @@
     <xsl:template name="odbModsCollectionClass">
         <xsl:variable name="mappedcollection">
           <xsl:choose>
-              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Kunst und Kulturgeschichte Oldenburg'">
+              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Kunst und Kulturgeschichte Oldenburg' or
+                              contains(p:datafield[@tag='036L']/p:subfield[@code='a'], 'Landesmuseum Kunst und Kulturgeschichte Oldenburg')">
                 <xsl:value-of select="'lmo'" />
               </xsl:when>
-              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Natur und Mensch Oldenburg'">
+              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Natur und Mensch Oldenburg' or
+                              contains(p:datafield[@tag='036L']/p:subfield[@code='a'], 'Landesmuseum Natur und Mensch Oldenburg')">
                 <xsl:value-of select="'lmnmo'" />
               </xsl:when>
-              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Museumsdorf Cloppenburg'">
+              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Museumsdorf Cloppenburg' or
+                              contains(p:datafield[@tag='036L']/p:subfield[@code='a'], 'Museumsdorf Cloppenburg')">
                 <xsl:value-of select="'mdc'" />
               </xsl:when>
-              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Stadtmuseum Oldenburg'">
+              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Stadtmuseum Oldenburg' or
+                              contains(p:datafield[@tag='036L']/p:subfield[@code='a'], 'Stadtmuseum Oldenburg')">
                 <xsl:value-of select="'smo'" />
               </xsl:when>
-              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Schlossmuseum Jever'">
+              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Schlossmuseum Jever' or
+                              contains(p:datafield[@tag='036L']/p:subfield[@code='a'], 'Schlossmuseum Jever')">
                 <xsl:value-of select="'smj'" />
-              </xsl:when>
-              <xsl:when test="contains(p:datafield[@tag='036L']/p:subfield[@code='a'], 'Landesmuseum Natur und Mensch Oldenburg')">
-                <xsl:value-of select="'lmnmo'" />
               </xsl:when>
               <xsl:otherwise>
                 <xsl:value-of select="$collection" />
