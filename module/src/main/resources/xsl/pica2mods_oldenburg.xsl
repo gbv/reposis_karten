@@ -81,7 +81,7 @@
     <xsl:template name="odbModsCollectionClass">
         <xsl:variable name="mappedcollection">
           <xsl:choose>
-              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Kunst &amp; Kultur Oldenburg'">
+              <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Kunst und Kulturgeschichte Oldenburg'">
                 <xsl:value-of select="'lmo'" />
               </xsl:when>
               <xsl:when test="p:datafield[@tag='009A']/p:subfield[@code='c']='Landesmuseum Natur und Mensch Oldenburg'">
