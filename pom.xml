@@ -3,13 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>de.gbv.reposis</groupId>
-    <artifactId>reposis_parent</artifactId>
+    <artifactId>reposis_mir_parent</artifactId>
     <version>2021.06-SNAPSHOT</version>
   </parent>
   <groupId>de.vzg</groupId>
   <artifactId>reposis_karten</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>2021.06-SNAPSHOT</version>
   <name>reposis_karten</name>
+
   <build>
     <plugins>
       <plugin>
@@ -17,6 +18,7 @@
         <artifactId>maven-jar-plugin</artifactId>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
           <descriptorRefs>
@@ -30,6 +32,7 @@
               <MCR-Auto-Deploy>true</MCR-Auto-Deploy>
             </manifestEntries>
           </archive>
+
         </configuration>
         <executions>
           <execution>
@@ -42,16 +45,8 @@
       </plugin>
     </plugins>
   </build>
+
   <repositories>
-    <!-- central is required for bibsonomy not to take over every artifact -->
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>Central Repository</name>
-      <url>https://repo.maven.apache.org/maven2</url>
-    </repository>
     <repository>
       <releases>
         <enabled>false</enabled>
@@ -59,18 +54,9 @@
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
-      <id>ossrhs01</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
-    <repository>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <id>central-portal-snapshots</id>
+      <name>Central Portal Snapshots</name>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
     </repository>
     <repository>
       <snapshots>
@@ -80,6 +66,7 @@
       <name>Official Source Code Releases of selected BibSonomy Modules</name>
       <url>https://dev.bibsonomy.org/maven2/</url>
     </repository>
+
   </repositories>
   <dependencies>
     <dependency>
@@ -111,19 +98,18 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.mycore</groupId>
-      <artifactId>mycore-base</artifactId>
+        <groupId>org.mycore</groupId>
+        <artifactId>mycore-base</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.mycore</groupId>
-      <artifactId>mycore-mods</artifactId>
+        <groupId>org.mycore</groupId>
+        <artifactId>mycore-mods</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.mycore</groupId>
+        <groupId>org.mycore</groupId>
       <artifactId>mycore-solr</artifactId>
-      <version>2021.06.2-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -137,6 +123,7 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.mycore</groupId>
       <artifactId>mycore-base</artifactId>
@@ -144,6 +131,5 @@
       <classifier>tests</classifier>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 </project>
