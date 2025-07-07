@@ -1,8 +1,0 @@
-Sitemap: http://kartenspeicher.gbv.de/mir/sitemap_google.xml
-User-agent: *
-Allow: /servlets/MCRFileNodeServlet/
-Disallow: /*?
-Disallow: /servlets/
-Disallow: /browse/
-Disallow: /rsc/
-Disallow: /api/
